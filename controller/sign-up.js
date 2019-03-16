@@ -1,3 +1,4 @@
+//用户注册
 const {addUsr} = require("../model/signUp");
 
 module.exports = async (ctx)=>{
