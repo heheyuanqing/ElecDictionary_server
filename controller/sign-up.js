@@ -1,7 +1,7 @@
 //用户注册
-const {addUsr} = require("../model/signUp");
+const {addUsr} = require("../model/signUp")
 
-module.exports = async (ctx)=>{
+module.exports = async ctx => {
     const usr = ctx.body.query;
     let {id,psw,repsw} = usr;
 

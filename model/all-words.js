@@ -9,10 +9,10 @@ let handleWords = async (val)=>{
     //TODO 根据管理员不同的操作选择进行数据库对应的操作
     //添加、删除、更新
     switch(val.type){
-        case "insert":  info =  await mysql.query(_insertSql,[val.en,val.cn,val.uk,val.us]);
-        case "delete":  info =  await mysql.query(_deletetSql);
-        case "insert":  info =  await mysql.query(_insertSql,[val.en,val.cn,val.uk,val.us]);
-        case "search":  info =  await mysql.query(_searchSql);
+        case "insert":  info =  await mysql.query(_insertSql,[val.en,val.cn,val.uk,val.us]);break;
+        case "delete":  info =  await mysql.query(_deletetSql);break;
+        case "insert":  info =  await mysql.query(_insertSql,[val.en,val.cn,val.uk,val.us]);break;
+        case "search":  info =  await mysql.query(_searchSql);break;
     }
     return info;
 }
