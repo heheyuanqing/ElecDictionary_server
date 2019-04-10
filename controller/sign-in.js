@@ -1,7 +1,7 @@
 //用户登录
-const {getUsr} = require("../model/signIn");
+const getUsr = require("../model/usr");
 
-module.export=async (ctx)=>{
+module.export = async (ctx)=>{
     const param = ctx.requst.query;
     const {id} = param;
     if(!id){

@@ -1,5 +1,5 @@
 //用户注册
-const {addUsr} = require("../model/signUp")
+const getUsr = require("../model/signUp")
 
 module.exports = async ctx => {
     const usr = ctx.body.query;
@@ -11,7 +11,7 @@ module.exports = async ctx => {
             msg:"参数不足"
         }
     }
-    await addUsr(usr).then(res=>{
+    await getUsr(usr).then(res=>{
           return ctx.body={
               status:200,
               msg:"注册成功"

@@ -1,6 +1,5 @@
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
-const config = require('./config/default.js')
 const router = require('./router/index.js')
 
 const app = new Koa()
@@ -29,6 +28,6 @@ app.use(async (ctx, next) => {
 
 app.use(router.routes()).use(router.allowedMethods())
 
-app.listen(config.port || 8080, () => {
+app.listen(8080, () => {
   console.log(`listening on port 8080`)
 })

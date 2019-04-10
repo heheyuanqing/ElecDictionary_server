@@ -1,6 +1,6 @@
 const mysql = require('../config/connect_mysql');
 
-let usr = async (val)=>{
+module.exports = async (val)=>{
     let _searchSql = `SELECT * FROM usr WHERE usr_no="${val.name}"`;
     let _addSql = `INSERT INTO usr(usr_no,usr_psw) values (?,?)`;
     let info;
@@ -12,6 +12,3 @@ let usr = async (val)=>{
     return info;
 }
 
-module.exports = {
-    usr
-};

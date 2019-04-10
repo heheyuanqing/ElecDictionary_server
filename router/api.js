@@ -1,4 +1,4 @@
-const router =  require('kos-router')();
+const router =  require('koa-router')();
 const {signin} = require('../controller/sign-in')
 
 router.get('/signin',signin);
