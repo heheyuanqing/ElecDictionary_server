@@ -62,7 +62,7 @@ function deleteWord(id){
    })
  }
  
-module.exports = async  ctx => {
+ const handleSelWord =  async  ctx => {
    const { action ,id} = ctx.body.query
 
    switch(action){
@@ -75,3 +75,4 @@ module.exports = async  ctx => {
       };break;
    }
 }
+module.exports = { handleSelWord }

@@ -1,7 +1,9 @@
-//用户注册
+/**
+ * 用户注册 
+ * */
 const getUsr = require("../model/signUp")
 
-module.exports = async ctx => {
+const signup = async ctx => {
     const usr = ctx.body.query;
     let {id,psw,repsw} = usr;
 
@@ -23,3 +25,5 @@ module.exports = async ctx => {
         }
     })
 }
+
+module.exports = { signup }

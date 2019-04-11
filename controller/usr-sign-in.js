@@ -1,7 +1,9 @@
-//用户登录
+/** 
+ * 用户登录
+ *  */
 const getUsr = require("../model/usr");
 
-module.export = async (ctx)=>{
+const signin = async ctx =>{
     const param = ctx.requst.query;
     const {id} = param;
     if(!id){
@@ -29,3 +31,5 @@ module.export = async (ctx)=>{
         }
     })
 }
+
+module.exports = { signin }
