@@ -1,7 +1,7 @@
 //对系统词库的操作
 const {wordSql} = require('../model/all-words')
 
-function addWord(id){
+const addWord = async id =>{
   await wordSql({type:'insert',en:id}).then(res => {
     if(res.length > 0){
       ctx.body={
@@ -22,7 +22,7 @@ function addWord(id){
 }
 
 
-function deleteWord(id){
+const deleteWord = async id => {
    await wordSql({type:'delete',en:id}).then(res => {
      if(res.length > 0){
        ctx.body={
@@ -42,7 +42,7 @@ function deleteWord(id){
    })
  }
  
- function update(id){
+ const update = async id => {
    await wordSql({type:'delete',en:id}).then(res => {
      if(res.length > 0){
        ctx.body={
@@ -75,4 +75,4 @@ function deleteWord(id){
       };break;
    }
 }
-module.exports = { handleWord}
+module.exports = handleWord

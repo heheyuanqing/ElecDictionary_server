@@ -29,5 +29,5 @@ app.use(async (ctx, next) => {
 app.use(router.routes()).use(router.allowedMethods())
 
 app.listen(8080, () => {
-  console.log(`listening on port 8080`)
+  console.log(`listening on http://localhost:8080`)
 })

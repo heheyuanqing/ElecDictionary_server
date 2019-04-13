@@ -4,7 +4,9 @@
 const getUsr = require("../model/usr");
 
 const signin = async ctx =>{
-    const param = ctx.requst.query;
+    console.log(1111)
+    ctx.response.body = `<h1>Hello, ${name}!</h1>`;
+    const param = ctx.requst.params;
     const {id} = param;
     if(!id){
         return ctx.body={
@@ -32,4 +34,4 @@ const signin = async ctx =>{
     })
 }
 
-module.exports = { signin }
+module.exports =  signin 
