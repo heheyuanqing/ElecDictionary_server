@@ -1,38 +1,53 @@
 //对系统词库的操作
-const {wordSql} = require('../model/all-words')
+const wordSql = require('../model/all-words')
 
-const addWord = async id =>{
-  await wordSql({type:'insert',en:id}).then(res => {
-    if(res.length > 0){
-      ctx.body={
-         status:200,
-         msg:'ok'
-      }
-    }
+const searchWord = async ctx => {
+  const {word} = ctx.request.query
+  if(!word){
     return ctx.body={
-       status:400,
-       msg:'出错了'
+        status:401,
+        msg:'缺少参数'
+      }
+  }
+  await wordSql({type:'search',en:word}).then(res => {
+    ctx.body = {
+      status:200,
+      msg: res[0]
+    }
+  }, err => {
+    return ctx.body={
+      status:400,
+      msg:'查询出错'
+    }
+   })
+}
+
+const addWord = async ctx =>{
+  const {word} = ctx.request.body
+  await wordSql({...word, type:'insert'}).then(res => {
+   if(res){
+      return ctx.body={
+         status:200,
+         msg:'添加成功'
+      }
     }
   }, err => {
    return ctx.body={
       status:400,
-      msg:'查询出错'
+      msg:'添加出错'
    }
   })
 }
 
 
-const deleteWord = async id => {
-   await wordSql({type:'delete',en:id}).then(res => {
-     if(res.length > 0){
-       ctx.body={
+const deleteWord = async ctx => {
+   const {word} = ctx.request.body
+   await wordSql({...word, type:'delete'}).then(res => {
+     if(res){
+      return ctx.body={
           status:200,
-          msg:'ok'
+          msg:'删除成功'
        }
-     }
-     return ctx.body={
-        status:400,
-        msg:'出错了'
      }
    }, err => {
     return ctx.body={
@@ -42,17 +57,14 @@ const deleteWord = async id => {
    })
  }
  
- const update = async id => {
-   await wordSql({type:'delete',en:id}).then(res => {
+ const updateWord = async ctx => {
+   const {word} = ctx.request.body
+   await wordSql({...word, type:'update'}).then(res => {
      if(res.length > 0){
-       ctx.body={
+      return ctx.body={
           status:200,
-          msg:'ok'
+          msg:'更新成功'
        }
-     }
-     return ctx.body={
-        status:400,
-        msg:'出错了'
      }
    }, err => {
     return ctx.body={
@@ -61,18 +73,30 @@ const deleteWord = async id => {
     }
    })
  }
- 
- const handleWord = async  ctx => {
-   const { action ,id} = ctx.body.query
-
-   switch(action){
-      case 'add':addWord(id);break;
-      case 'delete':deleteWord(id);break;
-      case 'update':updateWord(id);break;
-      default: ctx.body={
-         status:400,
-         msg:"操作失败"
-      };break;
-   }
+ const searchWordById = async ctx => {
+  const {id} = ctx.request.query
+  if(!id){
+    return ctx.body={
+        status:401,
+        msg:'缺少参数'
+      }
+  }
+  await wordSql({type:'search-by-id',id}).then(res => {
+    ctx.body = {
+      status:200,
+      msg: res[0]
+    }
+  }, err => {
+    return ctx.body={
+      status:400,
+      msg:'查询出错'
+    }
+   })
+ }
+module.exports = {
+   addWord,
+   deleteWord,
+   updateWord,
+   searchWord,
+   searchWordById
 }
-module.exports = handleWord

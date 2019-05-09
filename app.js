@@ -1,6 +1,6 @@
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
-const router = require('./router/index.js')
+const router = require('./router/api.js')
 
 const app = new Koa()
 
@@ -26,7 +26,8 @@ app.use(async (ctx, next) => {
   await next()
 })
 
-app.use(router.routes()).use(router.allowedMethods())
+app.use(router.routes())
+app.use(router.allowedMethods())
 
 app.listen(8080, () => {
   console.log(`listening on http://localhost:8080`)

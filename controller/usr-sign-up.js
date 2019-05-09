@@ -4,15 +4,16 @@
 const getUsr = require("../model/usr")
 
 const signup = async ctx => {
-    const usr = ctx.body.query;
-    let {id,psw,repsw} = usr;
+    const usr = ctx.request.body;
+    let {name,psw} = usr;
 
-    if(!id||!psw||!repsw){
-        return ctx.body={
-            status:400,
-            msg:"参数不足"
-        }
+    if(!name||!psw){
+      return ctx.body={
+        status:400,
+        msg:"参数不足"
+      }
     }
+    usr.type="sign-up"
     await getUsr(usr).then(res=>{
           return ctx.body={
               status:200,
