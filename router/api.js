@@ -6,6 +6,8 @@ const {deleteWord, updateWord, addWord, searchWord,searchWordById} = require('..
 const {getUsrInfo, setFlag} = require('../controller/usr-info')
 const {jinshan} = require('../controller/getKing')
 const {recommend} = require('../controller/recommend')
+const {addErroMsg,deleteErroMsg,getErroMsg} = require('../controller/err-msg')
+
 const routers =  router.post('/api/signin',signIn)
                        .post('/api/signup',signUp)
                        .get('/api/search', searchWord)
@@ -25,4 +27,7 @@ const routers =  router.post('/api/signin',signIn)
                        .get('/api/getWordById',searchWordById)
                        .get('/api/jinshan',jinshan)
                        .post('/api/recommend',recommend)
+                       .get('/api/get-erro-msg',getErroMsg)
+                       .post('/api/add-erro-msg',addErroMsg)
+                       .post('/api/delete-erro-msg',deleteErroMsg)
 module.exports = routers

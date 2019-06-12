@@ -122,47 +122,37 @@ const  stuSubject = async ctx => {
    })
  }
 
- const stuAwait = async (word,name)=>{
-   return await selWordSql({type:'update-stu-process',word:node,name})
+const updateStuSelwords =async ctx => {
+  const {name,words} = ctx.request.body
+  console.log('update'+name)
+  await selWordSql({type:'update-stu-process',word:words,name}).then(res => {
+     return ctx.body = {
+        status:200,
+        msg:'ok',
+        data:res
+     }
+  },err => {
+     return ctx.body = {
+        status:400,
+        msg:'查询出错'
+     }
+  })
 }
-const updateStuSelwords = ctx => {
-  const {name,words} = ctx.body
-  let arr = []
-  words.map(node => {{
-     arr.push(stuAwait)
-  }})
-  Promise.all(arr).then(res => {
-   console.log(res)
-   return ctx.body = {
-      status:200,
-      msg:'ok',
-   }},err => {
+
+const updateTestSelwords =async ctx => {
+   const {name,words} = ctx.request.body
+   await selWordSql({type:'update-test-process',word:words,name:name}).then(res => {
+      return ctx.body = {
+         status:200,
+         msg:'ok',
+         data:res
+      }
+   },err => {
       return ctx.body = {
          status:400,
          msg:'查询出错'
       }
    })
-}
-const testAwait=async (word,name)=>{
-   return await selWordSql({type:'update-test-process',word:word,name:name})
-}
-const updateTestSelwords = ctx => {
-   const {name,words} = ctx.body
-   let arr = []
-   words.map(node => {{
-      arr.push(testAwait(node,name))
-   }})
-   Promise.all(arr).then(res => {
-      console.log(res)
-     return ctx.body = {
-       status:200,
-       msg:'ok',
-    }},err => {
-       return ctx.body = {
-          status:400,
-          msg:'查询出错'
-       }
-    })
  }
 
 module.exports =  {

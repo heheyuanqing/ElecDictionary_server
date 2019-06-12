@@ -24,8 +24,34 @@ module.exports = async function (val) {
   const _getStuWordSql = `select * from ${wordsName} where process=-1 limit 5`
   
   if(val.word && val.word.process ){
-    const _updateStuProcessSql = `UPDATE ${wordsName} SET process=${val.word.process},wrong_times=${val.word.wrong_times} where word_id="${val.word.id}"`
-    const  _updateTestProcessSql = `UPDATE ${wordsName} SET wrong_times=${val.word.wrong_times} where word_id="${val.word.id}"`  
+    console.log('update word process')
+    const _updateStuProcessSql = `UPDATE ${wordsName} SET
+    process = CASE id
+        WHEN ${val.word[0].id} THEN ${val.word[0].process}
+        WHEN ${val.word[1].id} THEN ${val.word[1].process}
+        WHEN ${val.word[2].id} THEN ${val.word[2].process}
+        WHEN ${val.word[3].id} THEN ${val.word[3].process}
+        WHEN ${val.word[4].id} THEN ${val.word[4].process}
+    END,
+    wrong_time = case id
+        WHEN ${val.word[0].id} THEN ${val.word[0].wrong_times}
+        WHEN ${val.word[1].id} THEN ${val.word[1].wrong_times}
+        WHEN ${val.word[2].id} THEN ${val.word[2].wrong_times}
+        WHEN ${val.word[3].id} THEN ${val.word[3].wrong_times}
+        WHEN ${val.word[4].id} THEN ${val.word[4].wrong_times}
+    END
+    WHERE id IN (${val.word[0].id},${val.word[1].id},${val.word[2].id},${val.word[3].id},${val.word[4].id})`
+    const  _updateTestProcessSql =`UPDATE ${wordsName} SET
+    wrong_time = case id
+        WHEN ${val.word[0].id} THEN ${val.word[0].wrong_times}
+        WHEN ${val.word[1].id} THEN ${val.word[1].wrong_times}
+        WHEN ${val.word[2].id} THEN ${val.word[2].wrong_times}
+        WHEN ${val.word[3].id} THEN ${val.word[3].wrong_times}
+        WHEN ${val.word[4].id} THEN ${val.word[4].wrong_times}
+    END
+    WHERE id IN (${val.word[0].id},${val.word[1].id},${val.word[2].id},${val.word[3].id},${val.word[4].id})`
+    // const _updateStuProcessSql = `UPDATE ${wordsName} SET process=${val.word.process},wrong_times=${val.word.wrong_times} where word_id="${val.word.id}"`
+    // const  _updateTestProcessSql = `UPDATE ${wordsName} SET wrong_times=${val.word.wrong_times} where word_id="${val.word.id}"`  
   }
  
   let res;

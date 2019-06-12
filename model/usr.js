@@ -11,7 +11,7 @@ module.exports = async (val)=>{
         case "recommend": info = await mysql.query(_recommendSql);break;
         case "sign-in": info =  await mysql.query(_searchSql);break;
         case "sign-up": info =  await mysql.query(_addSql,[val.name,val.psw]);break;
-        case "set-flag": info =  await mysqS.query(_setFlagSql);break;
+        case "set-flag": info =  await mysql.query(_setFlagSql);break;
     }
     return info;
 }
